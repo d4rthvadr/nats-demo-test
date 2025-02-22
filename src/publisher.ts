@@ -15,6 +15,7 @@ stan.on("connect", () => {
 
   const event: TicketCreatedEvent = {
     topic: Subjects.TicketCreated,
+    version: 1,
     payload: {
       id: "123",
       title: "concert",

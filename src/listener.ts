@@ -12,7 +12,10 @@ const stan = nats.connect("ticketing", clientId, {
 });
 
 stan.on("connect", () => {
-  const options = stan.subscriptionOptions().setManualAckMode(true);
+  const options = stan.subscriptionOptions()
+  .setDeliverAllAvailable()
+  .setDurableName("tickets-service")
+  .setManualAckMode(true);
 
   console.log("Listener connected to NATS");
 
