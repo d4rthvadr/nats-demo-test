@@ -14,7 +14,7 @@ stan.on("connect", () => {
   console.log("Publisher connected to NATS");
 
   const event: TicketCreatedEvent = {
-    topic: Subjects.TicketCreated,
+    subject: Subjects.TicketCreated,
     version: 1,
     payload: {
       id: "123",

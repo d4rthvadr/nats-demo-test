@@ -1,7 +1,6 @@
 export enum Subjects {
     // Ticket events
     TicketCreated = 'ticket:created',
-    // Account events
-    AccountDeposited = 'account:deposited',
-    AccountWithdrawn = 'account:withdrawn',
+    // Order events
+    OrderUpdated = 'order:updated',
 }
