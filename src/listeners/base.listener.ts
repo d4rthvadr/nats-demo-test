@@ -1,8 +1,9 @@
 import { Message, Stan } from "node-nats-streaming";
 import { ChannelEvent } from "../types/subjects.interface";
+import { Subjects } from "../types/subjects.enum";
 
 export abstract class BaseListener <T extends ChannelEvent> {
-    abstract subject: T['subject'];
+    abstract subject: Subjects;
     abstract queueGroupName: string;
     private client: Stan;
     protected ackWait: number = 5 * 1000;
