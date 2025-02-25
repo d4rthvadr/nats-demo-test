@@ -6,6 +6,9 @@ const clientId: string = genID("clientId");
 
 const stan = nats.connect("ticketing", clientId, {
   url: "http://localhost:4222",
+  reconnect: true,
+  maxReconnectAttempts: 5,
+  reconnectTimeWait: 9000,
 });
 
 stan.on("connect", () => {
@@ -20,6 +23,23 @@ stan.on("connect", () => {
   new TicketCreatedListener(stan).listen();
 
 });
+
+// Handle reconnection
+stan.on("reconnect", () => {
+  console.log("🔄 Reconnected to NATS Streaming!");
+});
+
+
+// Handle connection errors
+stan.on("error", (err) => {
+  console.error("Connection error:", err);
+});
+
+stan.on("disconnect", () => {
+  console.warn("⚠️ Disconnected! The client will try to reconnect.");
+});
+
+
 
 // Graceful shutdown
 process.on("SIGINT", () => stan.close());
