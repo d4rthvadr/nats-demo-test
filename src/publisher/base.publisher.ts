@@ -27,6 +27,7 @@ export abstract class BasePublisher<T extends PublishEvent> {
                     return reject(err);
                 }
                 console.log(`Event published to subject ${this.subject}`);
+                this.client.close();
                 resolve();
             });
         });
